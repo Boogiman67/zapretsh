@@ -1,3 +1,13 @@
+### All arguments here: https://github.com/bol-van/zapret
+### To enable ts fooling in Windows: netsh interface tcp set global timestamps=enabled
+
+--filter-tcp=80
+--dpi-desync=hostfakesplit
+--dpi-desync-fooling=md5sig
+--dpi-desync-repeats=2
+<HOSTLIST>
+
+--new
 --filter-tcp=443  <HOSTLIST>
 --dpi-desync=multidisorder
 --dpi-desync-split-pos=2,5,105,host+5,sld-1,endsld-5,endsld
