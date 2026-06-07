@@ -9,7 +9,8 @@
 <HOSTLIST>
 
 ### https
---new --filter-tcp=443
+--new
+--filter-tcp=443
 --dpi-desync=fake,fakeddisorder
 --dpi-desync-split-pos=10,midsld
 --dpi-desync-fake-tls=/usr/share/zapret/fake/tls_clienthello_www_google_com.bin
@@ -23,8 +24,10 @@
 <HOSTLIST>
 
 ### quic
---new --filter-udp=443
---dpi-desync=fake --dpi-desync-repeats=6
+--new
+--filter-udp=443
+--dpi-desync=fake
+--dpi-desync-repeats=6
 --dpi-desync-fake-quic=/usr/share/zapret/fake/quic_initial_www_google_com.bin
 <HOSTLIST_NOAUTO>
 
