@@ -42,7 +42,8 @@
 
 ### wireguard, discord, telegram
 --new --filter-udp=1024-65535
---dpi-desync=fake --filter-l7=wireguard,discord,stun
+--dpi-desync=fake
+--filter-l7=wireguard,discord,stun
 --dpi-desync-cutoff=n2
 --dpi-desync-repeats=6
 --dpi-desync-fake-discord=/usr/share/zapret/fake/quic_initial_www_google_com.bin
