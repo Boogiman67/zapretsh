@@ -22,7 +22,8 @@
 ### quic
 --new
 --filter-udp=443
---dpi-desync=fake --dpi-desync-repeats=6
+--dpi-desync=fake
+--dpi-desync-repeats=6
 --dpi-desync-fake-quic=/usr/share/zapret/fake/quic_initial_www_google_com.bin
 <HOSTLIST_NOAUTO>
 
