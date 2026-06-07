@@ -1,54 +1,42 @@
 ### All arguments here: https://github.com/bol-van/zapret
 ### To enable ts fooling in Windows: netsh interface tcp set global timestamps=enabled
 
-### http
 --filter-tcp=80
 --dpi-desync=hostfakesplit
 --dpi-desync-fooling=md5sig
 --dpi-desync-repeats=2
 <HOSTLIST>
 
-### files rnd[0-9].bin autocreated only when the /tmp directory is specified
-### filled from /dev/urandom, size = minimal MSS of using interfaces
-### works with options ended -pattern,-syndata,-unknown,-unknown-udp
-### champloo ¯\_(ツ)_/¯
 --new
---filter-tcp=443
---dpi-desync=fake,fakedsplit
---dpi-desync-fakedsplit-mod=altorder=0
---dpi-desync-fakedsplit-pattern=/tmp/rnd1.bin
---dpi-desync-split-seqovl=811
---dpi-desync-split-seqovl-pattern=/tmp/rnd2.bin
---dpi-desync-split-pos=1,midsld
---dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.ozon.ru
---dpi-desync-fooling=ts
-<HOSTLIST>
+--filter-tcp=443  <HOSTLIST>
+--dpi-desync=multidisorder
+--dpi-desync-split-pos=2,5,105,host+5,sld-1,endsld-5,endsld
 
-### quic
---new 
---filter-udp=443
+--new
+--filter-tcp=443 <HOSTLIST>
+--dpi-desync=hostfakesplit
+--dpi-desync-hostfakesplit-mod=host=rzd.ru
+--dpi-desync-hostfakesplit-midhost=host-2
+--dpi-desync-split-seqovl=726
+--dpi-desync-fooling=badsum,badseq
+--dpi-desync-badseq-increment=0
+
+--new
+--filter-udp=443 <HOSTLIST_NOAUTO>
 --dpi-desync=fake
---dpi-desync-repeats=17
+--dpi-desync-repeats=6
 --dpi-desync-fake-quic=/usr/share/zapret/fake/quic_initial_www_google_com.bin
-<HOSTLIST_NOAUTO>
 
-### games
 --new
---filter-udp=21000-21500,65530-65535
+--filter-udp=19294-19344,50000-50100
+--filter-l7=discord,stun
 --dpi-desync=fake
---dpi-desync-cutoff=n2
---dpi-desync-any-protocol=1
---dpi-desync-autottl=2
 --dpi-desync-repeats=6
---dpi-desync-fake-unknown-udp=/usr/share/zapret/fake/quic_initial_www_google_com.bin
 
-### wireguard, discord, telegram
 --new
---filter-udp=1024-65535
---dpi-desync=fake
---filter-l7=wireguard,discord,stun
---dpi-desync-cutoff=n2
---dpi-desync-repeats=6
---dpi-desync-fake-discord=/usr/share/zapret/fake/quic_initial_www_google_com.bin
---dpi-desync-fake-wireguard=/usr/share/zapret/fake/quic_initial_www_google_com.bin
---dpi-desync-fake-stun=/usr/share/zapret/fake/quic_initial_www_google_com.bin
+--filter-tcp=2053,2083,2087,2096,8443
+--hostlist-domains=discord.media
+--dpi-desync=multisplit
+--dpi-desync-split-seqovl=652
+--dpi-desync-split-pos=2
+--dpi-desync-split-seqovl-pattern=/usr/share/zapret/fake/tls_clienthello_www_google_com.bin
