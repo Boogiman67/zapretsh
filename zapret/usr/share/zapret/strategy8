@@ -20,8 +20,7 @@
 --dpi-desync-split-seqovl=2
 --dpi-desync-split-seqovl-pattern=/usr/share/zapret/fake/tls_clienthello_www_google_com.bin
 --dpi-desync-fake-tls-mod=rnd,dupsid,sni=fonts.google.com
---hostlist-exclude=/etc/zapret/exclude.list
-#--hostlist-exclude=/etc/storage/zapret/exclude.list
+--hostlist-exclude=/etc/storage/zapret/exclude.list
 
 ### quic
 --new
@@ -29,8 +28,7 @@
 --dpi-desync=fake
 --dpi-desync-repeats=6
 --dpi-desync-fake-quic=/usr/share/zapret/fake/quic_initial_www_google_com.bin
---hostlist-exclude=/etc/zapret/exclude.list
-#--hostlist-exclude=/etc/storage/zapret/exclude.list
+--hostlist-exclude=/etc/storage/zapret/exclude.list
 
 ### games
 --new
