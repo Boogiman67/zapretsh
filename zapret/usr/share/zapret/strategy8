@@ -10,7 +10,8 @@
 #--hostlist-exclude=/etc/storage/zapret/exclude.list
 
 ### https: filter all domains, exept exclude.list
---new --filter-tcp=443
+--new
+--filter-tcp=443
 --dpi-desync=fake,fakedsplit
 --dpi-desync-fakedsplit-mod=altorder=1
 --dpi-desync-fakedsplit-pattern=/usr/share/zapret/fake/tls_clienthello_www_google_com.bin
@@ -23,14 +24,17 @@
 #--hostlist-exclude=/etc/storage/zapret/exclude.list
 
 ### quic
---new --filter-udp=443
---dpi-desync=fake --dpi-desync-repeats=6
+--new
+--filter-udp=443
+--dpi-desync=fake
+--dpi-desync-repeats=6
 --dpi-desync-fake-quic=/usr/share/zapret/fake/quic_initial_www_google_com.bin
 --hostlist-exclude=/etc/zapret/exclude.list
 #--hostlist-exclude=/etc/storage/zapret/exclude.list
 
 ### games
---new --filter-udp=21000-21500,65530-65535
+--new
+--filter-udp=21000-21500,65530-65535
 --dpi-desync=fake
 --dpi-desync-cutoff=n2
 --dpi-desync-any-protocol=1
@@ -39,8 +43,10 @@
 --dpi-desync-fake-unknown-udp=/usr/share/zapret/fake/quic_initial_www_google_com.bin
 
 ### wireguard, discord, telegram
---new --filter-udp=1024-65535
---dpi-desync=fake --filter-l7=wireguard,discord,stun
+--new
+--filter-udp=1024-65535
+--dpi-desync=fake
+--filter-l7=wireguard,discord,stun
 --dpi-desync-cutoff=n2
 --dpi-desync-repeats=6
 --dpi-desync-fake-discord=/usr/share/zapret/fake/quic_initial_www_google_com.bin
